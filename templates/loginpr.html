@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Login Provider{% endblock title %}
+{% block body %}
+{% block css %}<link rel="stylesheet" href="/static/login.css">{% endblock css %}
+
+
+
+
+
+<div class="container d-flex align-items-center justify-content-center" >
+    <section class="container1 mt-5 mb-5">
+        <header id="head">Login</header>
+        <form action="" method="post" class="form1" id="loginform">
+            {% csrf_token %}
+
+            <div class="input-box">
+              <label>Username</label>
+              <input type="text" name="username" id="username" placeholder="Enter Username " required />
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter Password" required />
+            </div>
+            
+            
+            <button type="submit">Login</button>
+            
+            
+        </form>
+       
+        <p id="para">I don't have account</p>
+        <a href="signuppr">
+            <button id="changebtn1">Register</button>
+        </a>
+        
+        
+      </section>
+</div>
+
+
+
+{% endblock %}

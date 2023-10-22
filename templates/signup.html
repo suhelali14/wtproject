@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block body %}
+{% block css %}<link rel="stylesheet" href="/static/login.css">{% endblock css %}
+
+
+
+
+
+<div class="container d-flex align-items-center justify-content-center" >
+    <section class="container1 mt-5 mb-5">
+        <header id="head">Sign Up</header>
+        
+        <form action="" method="post" class="form1" id="registrationform">
+            {% csrf_token %}
+          <div class="input-box">
+            <label>Full Name</label>
+            <input type="text" name="fullname" placeholder="Enter full name" required />
+          </div>
+          <div class="input-box">
+            <label>Email Address</label>
+            <input type="email" name="email"  placeholder="Enter email address" required />
+          </div>
+          <div class="input-box">
+            <label>Username</label>
+            <input type="text" name="username"  placeholder="Enter Username" required />
+          </div>
+          <div class="input-box">
+            <label>Password</label>
+            <input type="password"  name="password1"  placeholder="Enter Password" required />
+          </div>
+          <div class="input-box">
+            <label>Confirm Password</label>
+            <input type="password" name="password2" placeholder="Enter Password" required />
+          </div>
+          <div class="column">
+            <div class="input-box">
+              <label>Phone Number</label>
+              <input type="tel" name="phone"  placeholder="Enter phone number" required />
+            </div>
+            <div class="input-box">
+              <label>Birth Date</label>
+              <input type="date" name="birthdate"  placeholder="Enter birth date" required />
+            </div>
+          </div>
+          <div class="gender-box">
+            <h3>Gender</h3>
+            <div class="gender-option">
+              <div class="gender">
+                <input type="radio" id="check-male" name="gender" checked />
+                <label for="check-male">male</label>
+              </div>
+              <div class="gender">
+                <input type="radio" id="check-female" name="gender" />
+                <label for="check-female">Female</label>
+              </div>
+              <div class="gender">
+                <input type="radio" id="check-other" name="gender" />
+                <label for="check-other">prefer not to say</label>
+              </div>
+            </div>
+          </div>
+          <div class="input-box address">
+            <label>Address</label>
+            <div class="column">
+              <div class="select-box">
+                <select name="Country" >
+                  <option hidden>Country</option>
+                  <option>America</option>
+                  <option>Japan</option>
+                  <option>India</option>
+                  <option>Nepal</option>
+                </select>
+              </div>
+              <input type="text" name="city"  placeholder="Enter your city" required />
+            </div>
+            <div class="column">
+              <input type="number" name="zipcode"  placeholder="Enter zip/postal code" required />
+            </div>
+          </div>
+          <button type="submit">Register</button>
+          
+          
+        </form>
+        <p id="para">I already have account</p>
+    
+        <a href="login">
+          <button id="changebtn1">Login</button>
+        </a>
+      </section>
+</div>
+
+
+
+{% endblock %}

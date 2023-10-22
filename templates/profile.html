@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+{% if user_profile.usermode == 1 %}
+
+{% block css %}<link rel="stylesheet" href="/static/profile.css">{% endblock css %}
+
+<div class="block-container">
+    <div class="container" style="background-color: #1c1c1c;">
+        <div class="container1">
+    
+            <header >
+    
+                <div class="container">
+            
+                    <div class="profile">
+            
+                        <div class="profile-image">
+            
+                            <figure>
+                                <img src="{{user_profile.profileimg.url}}" style="height: auto; width: 100%;" alt="profile">
+                                <!-- <form class="edit-phto">
+                                    <i class="fa fa-camera-retro"></i>
+                                    <label class="fileContainer">
+                                        <a href="#account-settings">Upload Profile Photo</a>
+                                    </label>
+                                </form> -->
+                            </figure>
+            
+                        </div>
+                    <form action="/follow" method="POST">
+                            {% csrf_token %}
+                        <div class="profile-user-settings">
+
+            
+                            <h1 class="profile-user-name">{{user_object.username}}</h1>
+                            {% if user_object.username == user.username %}
+                            <button class="btn profile-edit-btn">Edit Profile</button>
+                            {% endif %}
+                            
+
+                            <input type="hidden" value="{{user.username}}" name="follower" />
+					        <input type="hidden" value="{{user_object.username}}" name="user" />
+
+                            {% if user_object.username != user.username %}
+                            <button type="submit" class="btn profile-edit-btn">{{button_text}}</button>
+                            {% endif %}
+                            <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+            
+                        </div>
+            
+                        <div class="profile-stats">
+                            
+                            <div class="data">
+                                
+                            {% if user_post_length == 0 %}
+                            <span style="color: white; font-size: 27px;"><b>No Post</b></span>
+                            {% elif user_post_length == 1 %}
+                            <span style="color: white; font-size: 27px;"><b>{{user_post_length}} Post</b></span>
+                            {% else %}
+                            <span style="color: white; font-size: 27px;"><b>{{user_post_length}} Posts</b></span>
+                            {% endif %}
+
+                            
+                            {% if user_followers == 0 or user_followers == 1 %}
+                            <span style="color: white; font-size: 27px;"><b>{{user_followers}} follower</b></span>
+                            {% else %}
+                            <span style="color: white; font-size: 27px;"><b>{{user_followers}} followers</b></span>
+                            {% endif %}
+        
+        
+                            <span style="color: white; font-size: 27px;"><b>{{user_following}} following</b></span>
+        
+                            <input type="hidden" value="{{user.username}}" name="follower" />
+                            <input type="hidden" value="{{user_object.username}}" name="user" />
+        
+                            </div>
+            
+                        </div>
+            
+                        <div class="profile-bio">
+            
+                            <p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
+            
+                        </div>
+                    </form>
+                    </div>
+                    <!-- End of profile section -->
+            
+                </div>
+                <!-- End of container -->
+            
+            </header>
+            
+            
+            <main>
+            
+                <div class="container container bg-trasparent my-4 p-3">
+                    
+                    <div class="gallery row row-cols-1 row-cols-xs-2 row-cols-sm-2 -lg-2 g-3">
+                        
+                        {% for post in user_posts %}
+                        <div class="gallery-item" tabindex="0">
+            
+                            <div class="img-box">
+                                <img src="{{post.image.url}}"  alt=""></a>
+                            </div>
+            
+                            <div class="gallery-item-info">
+            
+                                <ul>
+                                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
+                                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
+                                </ul>
+            
+                            </div>
+            
+                        </div>
+                        {% endfor %}
+                        
+            
+                    </div>
+                    <!-- End of gallery -->
+            
+                   
+            
+                </div>
+                <!-- End of container -->
+            
+            </main>
+        </div>
+    
+        
+    </div>
+</div>
+
+
+
+
+
+
+<script src = "/static/provider.js">
+</script>
+
+{% else %}
+<h1>
+    Page is not accessable by Customer
+</h1>
+{% endif %}
+
+{% endblock body %}

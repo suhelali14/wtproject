@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock title %}
+{% block body %}
+{% if user_profile.usermode == 0 %}
+
+{% block css %}<link rel="stylesheet" href="/static/services.css"> <link rel="stylesheet" href="/static/searchs.css">
+<link rel=”stylesheet” href=”https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css”>
+{% endblock css %}
+
+<form action="/search" method="POST" class="form">
+    {% csrf_token %}
+    <input type="search"  name="username" placeholder="Search here …" class="input">
+    <input type="text" name="city" placeholder="Search for city.." class="visually-hidden" value="{{user_city}}">
+    <button class="bg-transparent border-0"><i class="fa fa-search"></i></button>
+    
+</form>
+
+{% comment %} <form action="/search" method="POST">
+    {% csrf_token %}
+    <div class="left-side">
+        <!-- Logo -->
+        <div id="logo" class=" uk-hidden@s">
+            <a href="">
+                <b><h1 style="text-transform: uppercase;">Amigoo </h1></b>
+            </a>
+        </div>
+
+        <!--<div class="triger" uk-toggle="target: #wrapper ; cls: sidebar-active">
+            <i class="uil-bars"></i>
+        </div>-->
+
+        <!-- <div class="header_search"> -->
+            <input type="text" name="username" placeholder="Search for username..">&nbsp; &nbsp;
+            <button type="submit"><i class="fa fa-search fa-1x"></i></button>
+        <!-- </div> -->
+
+    </div>
+</form> {% endcomment %}
+
+
+<div class="container bg-trasparent my-4 p-3" style="position: relative" >
+    <!-- <p class="search-results-count">About 94 700 000 (0.39 sec.) results</p> -->
+    <h1 class="text-capitalize text-white text-center">Services In {{user_profile.city}} </h1>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-2 g-3">
+    {% for users in product_cart_list %}
+    
+    {% if users.location == user_profile.city %}
+    <section class="card-class col-card col hp p-3">
+
+        
+        <div class="card col" style="width:100%" >
+            <div class="img-sec">
+          <img src="{{users.productimg.url}}" class="card-img-top" alt="...">
+            </div>
+          <div class="card-body">
+            <h5 class="card-title">Service Name :-{{users.name}}</h5>
+            <p class="card-text">About Service :- {{users.description}}</p>
+            <p class="card-text">Provider Location :- {{users.location}}</p>
+            <p class="card-text">Phone Number :- {{users.phone}}</p>
+            <p class="card-text">Price Range :- {{users.price}}</p>
+            
+            <a href="tel:{{users.phone}}" class=" btn btn-primary" style="margin:2% 0%">Contact Provider</a>
+            <a href="/profile/{{users.user}}" class="btn btn-primary">Profile</a>
+
+        </div>
+          
+    </section>
+    
+        
+    </section>
+    {% endif %}
+    {% endfor %}
+    </div>
+    
+    <!-- <div class="text-align-center">
+        <ul class="pagination pagination-sm">
+            <li class="disabled"><a href="#">Prev</a>
+            </li>
+            <li class="active"><a href="#">1</a>
+            </li>
+            <li><a href="#">2</a>
+            </li>
+            <li><a href="#">3</a>
+            </li>
+            <li><a href="#">4</a>
+            </li>
+            <li><a href="#">5</a>
+            </li>
+            <li><a href="#">Next</a>
+            </li>
+        </ul>
+    </div> -->
+</div>
+<div class="container bg-trasparent my-4 p-3" style="position: relative">
+  <h1 class="text-capitalize text-white text-center">All Services In our Platform</h1>
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-2 g-3">
+    
+    {% for users in product_cart_list %}
+    {% if users.location != user_profile.city %}
+    <div class="card-class col hp p-3" >
+      <section class="search-result-item g-col-4">
+
+      
+        <div class="card col" >
+            <div class="img-sec">
+          <img src="{{users.productimg.url}}" class="card-img-top" alt="...">
+            </div>
+          <div class="card-body">
+            <h5 class="card-title">Service Name :-{{users.name}}</h5>
+            <p class="card-text">About Service :- {{users.description}}</p>
+            <p class="card-text">Provider Location :- {{users.location}}</p>
+            <p class="card-text">Phone Number :- {{users.phone}}</p>
+            <p class="card-text">Price Range :- {{users.price}}</p>
+            <a href="tel:{{users.phone}}" class=" btn btn-primary" style="margin:2% 0%">Contact Provider</a>
+            <br>
+            <a href="/profile/{{users.user}}" class="btn btn-primary">Profile</a>
+
+        </div>
+          
+    </section>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+{% else %}
+<h1>
+    Page is not accessable by Providers
+</h1>
+{% endif %}
+
+{% endblock body %}

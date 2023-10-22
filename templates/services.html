@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Services{% endblock title %}
+{% block body %}
+{% if user_profile.usermode == 0 %}
+
+{% block css %}<link rel="stylesheet" href="/static/services.css"> <link rel="stylesheet" href="/static/search.css">{% endblock css %}
+
+3
+
+
+        <section>
+
+            <div class="container" style="width=100%">
+                <div class="back">
+            
+                       
+<div class="container bg-trasparent my-4 p-3" style="position: relative">
+  <h1 class="text-capitalize text-white text-center">Services In Your Area</h1>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-2 g-3">
+      
+      {% for users in product %}
+     
+      {% if users.location == user_profile.city %}
+      <div class="card-class col hp p-3" >
+        <section class="search-result-item g-col-4">
+
+        
+          <div class="card col" >
+              <div class="img-sec">
+            <img src="{{users.productimg.url}}" class="card-img-top" alt="...">
+              </div>
+            <div class="card-body">
+              <h5 class="card-title">Service Name :-{{users.name}}</h5>
+              <p class="card-text">About Service :- {{users.description}}</p>
+              <p class="card-text">Provider Location :- {{users.location}}</p>
+              <p class="card-text">Phone Number :- {{users.phone}}</p>
+              <p class="card-text">Price Range :- {{users.price}}</p>
+              <a href="tel:{{users.phone}}" class=" btn btn-primary" style="margin:2% 0%">Contact Provider</a>
+              <br>
+              <a href="/profile/{{users.user}}" class="btn btn-primary">Profile</a>
+  
+          </div>
+            
+      </section>
+      </div>
+      {% endif %}
+      {% endfor %}
+      
+      {% if not product%}
+        
+      {% endif %}
+      
+    </div>
+</div>
+  
+                       
+<div class="container bg-trasparent my-4 p-3" style="position: relative">
+  <h1 class="text-capitalize text-white text-center">All Services In our Platform</h1>
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-2 g-3">
+    
+    {% for users in product %}
+    {% if users.location != user_profile.city %}
+    <div class="card-class col hp p-3" >
+      <section class="search-result-item g-col-4">
+
+      
+        <div class="card col" >
+            <div class="img-sec">
+          <img src="{{users.productimg.url}}" class="card-img-top" alt="...">
+            </div>
+          <div class="card-body">
+            <h5 class="card-title">Service Name :-{{users.name}}</h5>
+            <p class="card-text">About Service :- {{users.description}}</p>
+            <p class="card-text">Provider Location :- {{users.location}}</p>
+            <p class="card-text">Phone Number :- {{users.phone}}</p>
+            <p class="card-text">Price Range :- {{users.price}}</p>
+            <a href="tel:{{users.phone}}" class=" btn btn-primary" style="margin:2% 0%">Contact Provider</a>
+            <br>
+            <a href="/profile/{{users.user}}" class="btn btn-primary">Profile</a>
+
+        </div>
+          
+    </section>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+            
+                  
+            
+                </div>
+            
+            
+                
+                
+                </div>
+            </div>
+        <!-- right sidebar-->
+        </section>
+    </div>
+
+
+{% else %}
+<h1>
+    Page is not accessable by Providers
+</h1>
+{% endif %}
+
+{% endblock body %}
