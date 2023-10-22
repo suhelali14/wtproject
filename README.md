@@ -2,7 +2,7 @@
 Created the Service providing social platform
 
 # Installation
-Install the required django
+Install required django
 sqllite
 
 # Usage
